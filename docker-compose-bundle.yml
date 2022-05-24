@@ -1,0 +1,45 @@
+version: "3.3"
+
+services:
+  mbaza-demo-stt:
+    container_name: mbaza-demo-stt
+    restart: unless-stopped
+    build:
+      context: ./demo_stt/
+      dockerfile: ./Dockerfile
+      labels:
+        - mbaza-demo-stt
+    ports:
+      - "6910:6910"
+    volumes:
+      - ./demo_stt/sample_eng.txt:/code/demo_stt/sample_eng.txt
+      - ./demo_stt/sample_kin.txt:/code/demo_stt/sample_kin.txt
+    environment:
+      - THREADS=2
+      - PROCESSES=1
+      - SRV_HOST=0.0.0.0
+      - SRV_PORT=6910
+      - APP_LOG_LEVEL=debug
+
+  mbaza-orchestrator:
+    container_name: mbaza-orchestrator
+    restart: unless-stopped
+    build:
+      context: ./orchestrator/
+      dockerfile: ./Dockerfile
+      labels:
+        - mbaza-orchestrator
+    ports:
+      - "4573:4573"
+    volumes:
+      - /var/lib/asterisk/sounds:/var/lib/asterisk/sounds
+    environment:
+      - APP_LOG_LEVEL=debug
+      - SRV_PORT=4573
+      - SRV_HOST=0.0.0.0
+      - TTS_API_URL=http://m1.dev.mbaza.digital:6901
+      - TTS_API_URL_KIN=http://m1.dev.mbaza.digital:6903
+      - RASA_API_URL=http://rasa.dev.mbaza.digital/webhooks/rest/webhook
+      - RASA_API_URL_KIN=http://kiny.rasa.dev.mbaza.digital/webhooks/rest/webhook
+      - STT_API_URL=http://mbaza-demo-stt:6910/listen-eng
+      - STT_API_URL_KIN=http://mbaza-demo-stt:6910/listen-kin

@@ -1,0 +1,11 @@
+.idea/
+.DS_Store
+.pytest_cache
+**/__pycache__/
+venv/
+NVIDIADeepLearning/
+demo-asterisk/
+!demo-asterisk/docker-compose.yml
+!demo-asterisk/config/extensions.conf
+!demo-asterisk/config/pjsip.conf
+!demo-asterisk/config/sip.conf

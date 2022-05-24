@@ -1,0 +1,25 @@
+version: "3.3"
+services:
+
+  mbaza-orchestrator:
+    container_name: mbaza-orchestrator
+    restart: unless-stopped
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      labels:
+        - mbaza-orchestrator
+    ports:
+      - "4573:4573"
+    volumes:
+      - /var/lib/asterisk/sounds:/var/lib/asterisk/sounds
+    environment:
+      - APP_LOG_LEVEL=debug
+      - SRV_PORT=4573
+      - SRV_HOST=0.0.0.0
+      - TTS_API_URL=http://192.168.56.23:6901
+      - TTS_API_URL_KIN=http://192.168.56.23:6904
+      - RASA_API_URL=http://rasa.dev.mbaza.digital/webhooks/rest/webhook
+      - RASA_API_URL_KIN=http://kiny.rasa.dev.mbaza.digital/webhooks/rest/webhook
+      - STT_API_URL=http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:6910/listen-eng
+      - STT_API_URL_KIN=http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:6910/listen-kin
