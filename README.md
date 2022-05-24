@@ -11,6 +11,17 @@ make run-docker-kin-cpu
 
 #Usage
 ##SIp Phone
+Download and install a soft phone like Zoiper5, than configure sip account:
+```
+domain: asterisk.dev.mbaza.digital
+username: sipuser
+password: xsecret
+```
+
+- Dial: 770
+- After a welcome message, you’ll need to select the language: dial “1” for english and “2” for kinyarwanda.
+- After the beep you can ask a question and wait for a replay. You may press “#” to send the question quicker, silence detection works better when there is no background noize. 
+- The process repeats itself after audio replay, with a new beep to let you know the chatbot is listening for a new question. 
 
 ##Demo Client / console
 ### installation
