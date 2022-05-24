@@ -1,8 +1,11 @@
 #Deploy
+
 ## Orchestrator & demo_stt
+
 > make run-docker-bundle
 
 ## STT
+
 ```
 cd tts 
 make run-docker-eng-cpu
@@ -10,7 +13,9 @@ make run-docker-kin-cpu
 ```
 
 #Usage
+
 ##SIp Phone
+
 Download and install a soft phone like Zoiper5, than configure sip account:
 ```
 domain: asterisk.dev.mbaza.digital
@@ -24,10 +29,13 @@ password: xsecret
 - The process repeats itself after audio replay, with a new beep to let you know the chatbot is listening for a new question. 
 
 ##Demo Client / console
+
 ### installation
+
 > pip install -r orchestrator/requirements.txt
 
 ### run interactive console
+
 > python3 orchestrator/app/console.py
 
 The following environment variables can be configured: 
